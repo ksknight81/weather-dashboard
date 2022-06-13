@@ -38,7 +38,6 @@ header {
 }
 
 .current {
-    
     border: 2px solid gray;
 }
 
@@ -46,4 +45,9 @@ header {
     border: white;
     margin-left: 3%;
     
+}
+#city-search-term {
+    text-align: left;
+    color: black;
+    font-size: 20px;
 }

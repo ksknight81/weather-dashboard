@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Weather Dashboard</title>
     <link rel="stylesheet" type="text/css" href="./assets/css/styles.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
 
@@ -18,25 +18,36 @@
     <div class="row body-section">
     <!-- left hand side city navigation -->
     <div id="search" class="search-box col-3">
-        <h3>Search for a City:</h3>        
+        <h3 class="card-header">Search for a City:</h3>        
         <form id="city-form">
             <label class="form-label" for="cityname">Enter City Name</label>
-            <input name="city" id="cityname" type="text" autofocus="true" class="form-input">
+            <input name="cityname" id="cityname" type="text" autofocus="true" class="form-input" />
             <button type="submit" class="btn">Search</button>    
         </form>
       
     </div>
     <!-- right hand side weather app details -->
     <div id="city-details" class="current col-8">
-        <h2>city</h2>
+        <span id="city-search-term"></span>
+        <div id="city-container" class="list-group">
+            <img id="current-pic" alt="">
+            <p id="temperature"></p>
+            <p id="humidity"></p>
+            <p id="wind-speed"></p>
+            <p id="UV-index"></p>
+        </div>
     </div>
     <!-- left hand previous search results -->
     <div id="past-searches" class="previous col-3">
         <h2>previous</h2>
     </div>
     <!-- right hand 5 day forecast -->
-    <div id="5-day-forecast" class="long-range col-8">
-        <h4>5-Day Forecast:</h4>
+    <div id="five-day-forecast" class="long-range col-8">
+       <div class="col-md-2 forecast"></div>
+       <div class="col-md-2 forecast"></div>
+       <div class="col-md-2 forecast"></div>
+       <div class="col-md-2 forecast"></div>
+       <div class="col-md-2 forecast"></div>
     </div>
     </div>  
 </body>
