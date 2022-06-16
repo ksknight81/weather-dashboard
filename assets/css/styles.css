@@ -63,3 +63,8 @@ header {
     width: 100%;
 }
 
+.weatherIcon {
+    height: 200px;
+    width: 200px;
+}
+

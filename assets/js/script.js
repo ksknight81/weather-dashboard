@@ -3,6 +3,7 @@ const cityFormEl = document.querySelector("#city-form");
 const cityInputEl = document.querySelector("#cityname");
 const cityContainerEl = document.querySelector("#city-container");
 const citySearchTerm = document.querySelector("#city-search-term");
+const currentIcon = document.getElementById("currenticon")
 const currentTempEl = document.getElementById("temperature");
 const currentFeelTempEl = document.getElementById("feelslike");
 const currentHumidityEl = document.getElementById("humidity");
@@ -88,10 +89,11 @@ var getCityName = function (cityname) {
       cYear +
       ":";
     // console.log(cityname);
-    currentTempEl.textContent = "Temperature: " + weatherData.main.temp + "°C"
-    currentHumidityEl.textContent = "Humidity: " + weatherData.main.humidity + "%"
-    currentWindEl.textContent = "Wind-Speed: " + weatherData.wind.speed + " m/s"
-    currentUVEl.textContent = "UV Index: " + weatherData.main.uvi
+    currentIcon.src = "https://openweathermap.org/img/w/" + weatherData.weather[0].icon + ".png";
+    currentTempEl.textContent = "Temperature: " + weatherData.main.temp + "°C";
+    currentHumidityEl.textContent = "Humidity: " + weatherData.main.humidity + "%";
+    currentWindEl.textContent = "Wind-Speed: " + weatherData.wind.speed + " m/s";
+    currentUVEl.textContent = "UV Index: " + weatherData.main.uvi;
      console.log(weatherData);
      console.log(cityname);
     
@@ -142,9 +144,10 @@ var getForecast = function (lat, lon) {
       // creates the 'date' on the top of the long range forecast
       dayEl.append(document.createElement("p").textContent = (cMonth+1) + "/" + (cDay+(i+1)) + "/" + cYear);
       // get weather icon
-      var weatherImg = document.createElement<img>(("http://openweathermap.org/img/wn/11d@2x.png"));
-      weatherImg.image = document.createAttribute(weatherImg);
-//      var weatherImg = document.createElement<img>(("http://openweathermap.org/img/wn/" + data[i].weather[i].icon + "@2x.png"));
+      var newImage = document.createElement("img");
+      newImage.src = ("http://openweathermap.org/img/w/" + data[i].weather[0].icon + ".png");
+      console.log(data[i].weather[0].icon);
+     // var weatherImg = document.createElement<img>(("http://openweathermap.org/img/wn/" + data[i].weather[0].icon + ".png"));
       // get temperature data
       var temperature = document.createElement("p");
       temperature.textContent = "Temperature: " + data[i].temp.day + "°C";
@@ -160,7 +163,7 @@ var getForecast = function (lat, lon) {
       var img = document.createElement("img");
       img.image = data[i].icon
       
-      dayEl.append(weatherImg);
+      dayEl.append(newImage);
       dayEl.append(temperature);
       dayEl.append(feeltemp);
       dayEl.append(humidity);
