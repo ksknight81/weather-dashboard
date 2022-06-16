@@ -13,6 +13,28 @@ const historyEl = document.getElementById("history");
 var fiveDayEl = document.getElementById("5-day-forecast");
 let searchHistory = JSON.parse(localStorage.getItem("search")) || [];
 const APIKey = "874894e8821d60d8579f2e5276f4e9c8"; 
+var pastSearches = document.getElementById("past-search-city");
+
+// Local Storage variable to hold values
+var citySearches = [];
+
+var loadPreviousCity = function() {
+  citySearches = JSON.parse(localStorage.getItem(pastSearches));
+  if (!citySearches) {
+    citySearches = [];
+  }
+  for (i = 0; i < citySearches.length; i++) {
+
+    var search_results = document.querySelector("#search_history_results");
+    var pastSearches = document.createElement("li");
+
+    pastSearches.classList = "past-searches";
+    pastSearches.setAttribute("id", citySearches[i]);
+
+    pastSearches.innerHTML = citySearches[i];
+    search_results.appendChild(pastSearches);
+  }
+}
 
 // create date object
 const currentDate = new Date();
@@ -49,10 +71,16 @@ var formSubmitHandler = function (event) {
     getCityName(cityname);
     // clear old content
     cityInputEl.value = "";
+
+    //Save city in local Storage
+    saveCity(cityname);
+
   } else {
     alert("Please enter a City Name");
   }
 };
+
+
 
 //function to pull current weather data from weather app site
 var getCityName = function (cityname) {
@@ -89,11 +117,14 @@ var getCityName = function (cityname) {
       cYear +
       ":";
     // console.log(cityname);
+
+    var uvCurrent = weatherData.main.uvi;
+
     currentIcon.src = "https://openweathermap.org/img/w/" + weatherData.weather[0].icon + ".png";
     currentTempEl.textContent = "Temperature: " + weatherData.main.temp + "°C";
     currentHumidityEl.textContent = "Humidity: " + weatherData.main.humidity + "%";
     currentWindEl.textContent = "Wind-Speed: " + weatherData.wind.speed + " m/s";
-    currentUVEl.textContent = "UV Index: " + weatherData.main.uvi;
+    currentUVEl.textContent = "UV Index: " + uvCurrent;
      console.log(weatherData);
      console.log(cityname);
     
@@ -102,10 +133,6 @@ var getCityName = function (cityname) {
      getForecast(lat, lon);
   };
 };
-
-
-// Link to call a 
-
 
 
 //function to pull forecast weather data from weather app site
@@ -174,6 +201,7 @@ var getForecast = function (lat, lon) {
 
   };
 
-  
+
+
 // add event listeners to form and button container
 cityFormEl.addEventListener("submit", formSubmitHandler);

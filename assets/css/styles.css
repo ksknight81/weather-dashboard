@@ -32,7 +32,9 @@ header {
 }
 
 .current {
-    border: 2px solid gray;
+    border: solid gray;
+    background-color: lightblue;
+    border-radius: 25px;
 }
 
 .previous {
@@ -42,7 +44,7 @@ header {
 }
 #city-search-term {
     text-align: left;
-    color: black;
+    color: blue;
     font-size: 28px;
 }
 #city-container {
@@ -54,9 +56,10 @@ header {
 
 .forecast {
     font-size: 20px;
-    border-color: lightgreen;
+    border-color: navy;
     border-style: solid;
     background-color: lightblue;
+    border-radius: 25px;
 }
 
 .long-range {
@@ -64,7 +67,10 @@ header {
 }
 
 .weatherIcon {
-    height: 200px;
-    width: 200px;
+    height: 100px;
+    width: 100px;
 }
 
+#UV-index {
+    background-color: green;
+}
