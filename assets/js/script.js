@@ -203,5 +203,5 @@ var getForecast = function (lat, lon) {
 
 
 
-// add event listeners to form and button container
+ // add event listeners to form and button container
 cityFormEl.addEventListener("submit", formSubmitHandler);
