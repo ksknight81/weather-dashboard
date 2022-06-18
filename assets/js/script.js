@@ -11,30 +11,56 @@ const currentWindEl = document.getElementById("wind-speed");
 const currentUVEl = document.getElementById("UV-index");
 const historyEl = document.getElementById("history");
 var fiveDayEl = document.getElementById("5-day-forecast");
-let searchHistory = JSON.parse(localStorage.getItem("search")) || [];
+
+// search history pulls from local storage using the 'search' button and if its no value, 
+// create a new blank array
+var searchHistory = JSON.parse(localStorage.getItem("searchHistory")) || [];
+
 const APIKey = "874894e8821d60d8579f2e5276f4e9c8"; 
-var pastSearches = document.getElementById("past-search-city");
+
+//var pastSearches = document.getElementById("past-search-city");
 
 // Local Storage variable to hold values
-var citySearches = [];
+// var citySearches = [];
 
+
+//function to save local storage data
+var saveCity = function(cityname) {
+  // this pushes the value of cityname to the searchHistory array
+  searchHistory.push(cityname);
+  // verify if it shows the value of the searchHistory
+  console.log(searchHistory);
+  // this sets the value of searchHistory to be filled in by the JSON
+  localStorage.setItem("searchHistory", JSON.stringify(searchHistory));
+}
+
+// function to load local storage data
 var loadPreviousCity = function() {
-  citySearches = JSON.parse(localStorage.getItem(pastSearches));
-  if (!citySearches) {
-    citySearches = [];
-  }
-  for (i = 0; i < citySearches.length; i++) {
+  // citySearches = JSON.parse(localStorage.getItem(pastSearches));
+  // // if citySearches doesnt exist, then create the empty array
+  // if (!citySearches) {
+  //   var citySearches = [];
+  // }
+  
 
-    var search_results = document.querySelector("#search_history_results");
-    var pastSearches = document.createElement("li");
+ // function to pull / create the li items on the page if there is data
+  for (i = 0; i < searchHistory.length; i++) {
+    // variables for search results
+    var search_results = document.querySelector("#past-searches");
+    var searchHistoryEl = document.createElement("li");
 
-    pastSearches.classList = "past-searches";
-    pastSearches.setAttribute("id", citySearches[i]);
-
-    pastSearches.innerHTML = citySearches[i];
-    search_results.appendChild(pastSearches);
+    // When clicking on the SearchHistoryEl (values from previous), the function reSearch is actioned
+    searchHistoryEl.onclick = reSearch;
+    // setting the value on past-searches
+   // searchHistoryEl.classList = "past-searches";
+    searchHistoryEl.setAttribute("id", searchHistory[i]);
+    // populating the values in the html
+    searchHistoryEl.innerHTML = searchHistory[i];
+    search_results.appendChild(searchHistoryEl);
   }
 }
+
+
 
 // create date object
 const currentDate = new Date();
@@ -63,7 +89,7 @@ let Month = monthNameList[cMonth];
 var formSubmitHandler = function (event) {
   // prevent from refreshing
   event.preventDefault();
-
+  console.log(event);
   // get value from input element
   var cityname = cityInputEl.value.trim();
 
@@ -80,7 +106,20 @@ var formSubmitHandler = function (event) {
   }
 };
 
+// function to search by previous search
+function reSearch(event){
+ // prevent from refreshing
+ event.preventDefault();
+ console.log(event);
+ // get value from input element
+ var cityname = event.target.id;
 
+ if (cityname) {
+   getCityName(cityname);
+   // clear old content
+   cityInputEl.value = "";
+}
+}
 
 //function to pull current weather data from weather app site
 var getCityName = function (cityname) {
@@ -205,3 +244,4 @@ var getForecast = function (lat, lon) {
 
  // add event listeners to form and button container
 cityFormEl.addEventListener("submit", formSubmitHandler);
+loadPreviousCity();
