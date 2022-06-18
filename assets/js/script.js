@@ -18,12 +18,6 @@ var searchHistory = JSON.parse(localStorage.getItem("searchHistory")) || [];
 
 const APIKey = "874894e8821d60d8579f2e5276f4e9c8"; 
 
-//var pastSearches = document.getElementById("past-search-city");
-
-// Local Storage variable to hold values
-// var citySearches = [];
-
-
 //function to save local storage data
 var saveCity = function(cityname) {
   // this pushes the value of cityname to the searchHistory array
@@ -36,13 +30,6 @@ var saveCity = function(cityname) {
 
 // function to load local storage data
 var loadPreviousCity = function() {
-  // citySearches = JSON.parse(localStorage.getItem(pastSearches));
-  // // if citySearches doesnt exist, then create the empty array
-  // if (!citySearches) {
-  //   var citySearches = [];
-  // }
-  
-
  // function to pull / create the li items on the page if there is data
   for (i = 0; i < searchHistory.length; i++) {
     // variables for search results
@@ -59,8 +46,6 @@ var loadPreviousCity = function() {
     search_results.appendChild(searchHistoryEl);
   }
 }
-
-
 
 // create date object
 const currentDate = new Date();
@@ -173,7 +158,6 @@ var getCityName = function (cityname) {
   };
 };
 
-
 //function to pull forecast weather data from weather app site
 var getForecast = function (lat, lon) {
   //format the weather api url
@@ -197,7 +181,6 @@ var getForecast = function (lat, lon) {
     }
   });
 };
-
 
 //function to display 5 day forecast
   var displayForecast = function(data) {
@@ -239,8 +222,6 @@ var getForecast = function (lat, lon) {
     }
 
   };
-
-
 
  // add event listeners to form and button container
 cityFormEl.addEventListener("submit", formSubmitHandler);
